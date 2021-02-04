@@ -6,6 +6,6 @@ postgres:
   environment:
     POSTGRES_USER: root
     POSTGRES_PASSWORD: root
-    POSTGRES_DB: db_api
+    POSTGRES_DB: db_api_teste
 
 
