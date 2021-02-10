@@ -8,14 +8,14 @@ def ola():
 
     return "bem vindo"
 
-@app.route("/pessoa", methods=['GET','POST'])
+@app.route("/pessoa", methods=['POST'])
 def cadastrar():
     dados = request.json
     name = dados['name']
     document = dados['document']
     age = dados['age']
-
-    resposta = Banco.cadastrar(dados)
+    banco = Banco()
+    resposta = banco.cadastrar(dados)
 
     return resposta
 

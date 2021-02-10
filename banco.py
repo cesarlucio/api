@@ -12,15 +12,15 @@ cursor = conexao_banco.cursor()
 class Banco():
 
     def criar_tabela(self):
-     cursor.execute('''  CREATE TABLE IF NOT EXISTS pessoa
+        cursor.execute('''  CREATE TABLE IF NOT EXISTS pessoa
             (id     SERIAL PRIMARY KEY ,
             name   TEXT NOT NULL,
             document TEXT UNIQUE,
             age     INT);
             ''')
-     conexao_banco.commit()
+        conexao_banco.commit()
 
-    def cadastrar(dados):
+    def cadastrar(self,dados):
 
         name = dados['name']
         document = dados['document']
@@ -35,7 +35,9 @@ class Banco():
         else:
             resposta = "cadastrado"
             conexao_banco.commit()
+
         return resposta
+
     def buscar(self):
         cursor = Banco.conectarBanco()
 
