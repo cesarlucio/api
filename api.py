@@ -1,45 +1,31 @@
-from flask import Flask
-from alembic import op
-import sqlalchemy as sa
-import psycopg2
+from flask import Flask, request
+from banco import Banco
 
 app = Flask(__name__)
-con = psycopg2.connect(database="db_api_teste", user="root", password="root", host="localhost", port="5432")
-cur = con.cursor()
+
 @app.route('/')
-def hello():
+def ola():
 
-    cur.execute('''  CREATE TABLE IF NOT EXISTS usuario
-           (id     SERIAL PRIMARY KEY ,
-           name   TEXT NOT NULL,
-           document TEXT UNIQUE,
-           age     INT);
-           ''')
-    con.commit()
+    return "bem vindo"
 
-    return "Bem vindo"
+@app.route("/pessoa", methods=['GET','POST'])
+def cadastrar():
+    dados = request.json
+    name = dados['name']
+    document = dados['document']
+    age = dados['age']
 
-@app.route("/cadastrar/<string:name>/<string:document>/<int:age>")
-def cadastrar(name,document,age):
-    cur = con.cursor()
-    sql = "INSERT INTO usuario (name,document,age) values (%s, %s, %s)"
-    try:
-        cur.execute(sql,(name,document,age))
-
-    except:
-        resposta = "erro"
-        con.rollback()
-
-    else:
-        resposta = "cadastrado"
-        con.commit()
+    resposta = Banco.cadastrar(dados)
 
     return resposta
 
+@app.route("/pessoa/buscar", methods=['GET'])
+def buscar():
+    banco = Banco()
+    resposta = banco.buscar()
+    print(resposta)
 
 if __name__ == '__main__':
     app.run(debug=True, port=3000)
-
-con.close()
 
 
