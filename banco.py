@@ -12,6 +12,7 @@ cursor = conexao_banco.cursor()
 class Banco():
 
     def criar_tabela(self):
+
         cursor.execute('''  CREATE TABLE IF NOT EXISTS pessoa
             (id     SERIAL PRIMARY KEY ,
             name   TEXT NOT NULL,
@@ -38,12 +39,17 @@ class Banco():
 
         return resposta
 
-    def buscar(self):
-        cursor = Banco.conectarBanco()
+    def buscar(self,id):
+        if not id:
+            cursor.execute("SELECT * from pessoa")
+            resultado = cursor.fetchall()
+        else:
+            select_sql_where = "SELECT * from pessoa where id = %s"
+            cursor.execute(select_sql_where, (id,))
+            resultado = cursor.fetchall()
 
-        cursor.execute("SELECT * from pessoa")
-        resultado = cursor.fetchall()
-        print(resultado)
+
+        return resultado
 
 
 

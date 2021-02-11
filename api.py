@@ -21,10 +21,16 @@ def cadastrar():
 
 @app.route("/pessoa/buscar", methods=['GET'])
 def buscar():
+    dado = request.json
     banco = Banco()
-    resposta = banco.buscar()
-    print(resposta)
+    if dado:
+        id = dado['id']
+        resposta = banco.buscar(id)
+    else:
+        resposta = banco.buscar("")
 
+
+    return str(resposta)
 if __name__ == '__main__':
     app.run(debug=True, port=3000)
 
