@@ -1,7 +1,6 @@
 from flask import Flask, request
 from banco import Banco
 import flask
-
 app = Flask(__name__)
 
 @app.route('/')
