@@ -15,6 +15,7 @@ def cadastrar():
     name = dados['name']
     document = dados['document']
     age = dados['age']
+
     banco = Banco()
     resposta = banco.cadastrar(dados)
 
