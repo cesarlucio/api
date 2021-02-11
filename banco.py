@@ -1,5 +1,4 @@
 import psycopg2
-
 from decouple import config
 
 conexao_banco = psycopg2.connect(database=config('DATABASE'),
@@ -29,12 +28,13 @@ class Banco():
         insert_sql_statement = "INSERT INTO pessoa (name,document,age) values (%s, %s, %s)"
         try:
             cursor.execute(insert_sql_statement, (name, document, age))
+
         except:
-            resposta = "erro"
+            resposta = False
             conexao_banco.rollback()
 
         else:
-            resposta = "cadastrado"
+            resposta = True
             conexao_banco.commit()
 
         return resposta
@@ -48,8 +48,4 @@ class Banco():
             cursor.execute(select_sql_where, (id,))
             resultado = cursor.fetchall()
 
-
         return resultado
-
-
-

@@ -1,5 +1,6 @@
 from flask import Flask, request
 from banco import Banco
+import flask
 
 app = Flask(__name__)
 
@@ -17,7 +18,10 @@ def cadastrar():
     banco = Banco()
     resposta = banco.cadastrar(dados)
 
-    return resposta
+    if resposta:
+        return flask.Response(status=201)
+
+    return str(resposta)
 
 @app.route("/pessoa/buscar", methods=['GET'])
 def buscar():
@@ -29,8 +33,8 @@ def buscar():
     else:
         resposta = banco.buscar("")
 
-
     return str(resposta)
+
 if __name__ == '__main__':
     app.run(debug=True, port=3000)
 
