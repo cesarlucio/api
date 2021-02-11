@@ -1,2 +1,4 @@
 flask==1.1.2
 postgresql==13.1
+psycopg2==2.8.6
+python-decouple==3.4
