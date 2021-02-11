@@ -3,7 +3,7 @@ API em que será possível gravar e pegar dados de pessoas
 
 Para Começar
 -Instale o python 3.9 podendo usar o Homebrew usando o comando abaixo:
-brew install python3.8
+brew install python3.9
 
 -Instale as dependências que estão no arquivo requirements.txt
 
